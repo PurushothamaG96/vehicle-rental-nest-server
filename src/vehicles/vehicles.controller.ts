@@ -13,8 +13,8 @@ export class VehiclesController {
   }
 
   @Get()
-  findAll() {
-    return this.vehiclesService.findAll();
+  async findAll() {
+    return await this.vehiclesService.findAll();
   }
 
 }
