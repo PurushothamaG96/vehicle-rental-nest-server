@@ -11,10 +11,10 @@ export class BookingsController {
   async create(@Body() createBookingDto: CreateBookingDto) {
     const isAvailable = await this.bookingsService.findAvailableVehicles(createBookingDto.startDate, createBookingDto.endDate, createBookingDto.vehicleId)
     if(isAvailable.length){
-      return {message: 'This Vehicle Booked In this Date Range'}
+      return {message: 'This Vehicle Booked In this Date Range, no more available'}
     }
     else{
-
+      return 'Bookings done'
     }
   }
 

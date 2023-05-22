@@ -1,1 +1,4 @@
-export class CreateVehicleDto {}
+
+export class CreateVehicleDto {
+
+}
