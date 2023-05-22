@@ -8,27 +8,15 @@ export class BookingsController {
   constructor(private readonly bookingsService: BookingsService) {}
 
   @Post()
-  create(@Body() createBookingDto: CreateBookingDto) {
-    return this.bookingsService.findAvailableVehicles(createBookingDto.startDate, createBookingDto.endDate, createBookingDto.vehicleId)
+  async create(@Body() createBookingDto: CreateBookingDto) {
+    const isAvailable = await this.bookingsService.findAvailableVehicles(createBookingDto.startDate, createBookingDto.endDate, createBookingDto.vehicleId)
+    if(isAvailable.length){
+      return {message: 'This Vehicle Booked In this Date Range'}
+    }
+    else{
+
+    }
   }
 
-  @Get()
-  findAll() {
-    return this.bookingsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.bookingsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBookingDto: UpdateBookingDto) {
-    return this.bookingsService.update(+id, updateBookingDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.bookingsService.remove(+id);
-  }
+ 
 }
